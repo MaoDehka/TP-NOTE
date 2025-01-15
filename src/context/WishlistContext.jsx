@@ -11,12 +11,20 @@ export const WishlistProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    if (wishlist.length > 0) {
+      localStorage.setItem('wishlist', JSON.stringify(wishlist));
+    }
   }, [wishlist]);
 
   const addToWishlist = (movie) => {
-    if (!wishlist.find((item) => item.id === movie.id)) {
-      setWishlist([...wishlist, movie]);
+    const movieWithCorrectData = {
+      id: movie.id,
+      title: movie.title,
+      backdrop_path: movie.backdrop_path,
+    };
+  
+    if (!wishlist.find((item) => item.id === movieWithCorrectData.id)) {
+      setWishlist([...wishlist, movieWithCorrectData]);
     }
   };
 

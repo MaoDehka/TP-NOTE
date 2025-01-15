@@ -1,89 +1,146 @@
 .container {
-    width: 70vw;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color:#333;
-    font-family: Arial, sans-serif;
+    padding: 40px;
+    background-color: #333;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
 }
-
 
 .searchBar {
     display: flex;
-    gap: 10px;
-    margin-bottom: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 30px;
+    width: 100%;
 }
 
 .searchInput {
-    flex: 1;
     padding: 10px;
+    border-radius: 6px;
     border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 16px;
+    font-size: 1rem;
+    margin-right: 10px;
+    width: 300px;
 }
 
-.searchButton, .categorySelect {
-    padding: 10px 15px;
-    background-color:cornflowerblue;
+.searchButton {
+    padding: 10px 20px;
+    background-color: cornflowerblue;
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 6px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
-.searchButton:hover, .categorySelect:hover {
+.searchButton:hover {
+    background-color:#3700b3;
+}
+
+.categorySelect {
+    padding: 10px;
+    border-radius: 6px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    background-color: cornflowerblue;
+    margin-left: 20px;
+}
+
+.categorySelect:hover {
     background-color: #3700b3;
 }
 
 .moviesGrid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
     gap: 20px;
+    padding: 0;
+    list-style: none;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
 }
 
 .movieCard {
-    background-color: white;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     text-align: center;
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    max-width: 250px;
+    margin: 0 auto;
 }
 
 .movieCard:hover {
-    transform: scale(1.05);
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
 }
 
 .movieImage {
     width: 100%;
-    height: 300px;
-    object-fit: cover;
+    border-radius: 8px;
 }
 
 .movieTitle {
-    font-size: 18px;
-    margin: 10px 0;
+    font-size: 1.2rem;
     color: #333;
+    margin: 10px 0;
+    font-weight: 500;
 }
 
 .movieRating {
-    color: #888;
+    font-size: 1rem;
+    color: #666;
 }
 
 .detailsButton {
     display: inline-block;
-    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    text-decoration: none;
+    margin-top: 10px;
+}
+
+.detailsButton:hover {
+    background-color: #3700b3;
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+}
+
+.paginationButton {
     padding: 10px 20px;
     background-color: cornflowerblue;
     color: white;
     border: none;
-    border-radius: 5px;
-    text-decoration: none;
+    border-radius: 6px;
     cursor: pointer;
+    font-size: 1rem;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
 }
 
-.detailsButton:hover {
-    background-color:#3700b3;
+.paginationButton:hover {
+    background-color: #34495e;
+}
+
+.paginationButton:disabled {
+    background-color: #7f8c8d;
+    cursor: not-allowed;
+}
+
+.pagination span {
+    font-size: 1.2rem;
+    color: #fff;
 }
