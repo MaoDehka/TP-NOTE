@@ -1,0 +1,47 @@
+.container {
+    padding: 20px;
+    background-color: #f8f8ff;
+    font-family: Arial, sans-serif;
+}
+
+.title {
+    font-size: 24px;
+    color: #6200ea;
+    margin-bottom: 20px;
+}
+
+.wishlistList {
+    list-style-type: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.wishlistItem {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.movieTitle {
+    font-size: 18px;
+    margin: 10px 0;
+    color: #333;
+}
+
+.removeButton {
+    padding: 10px 15px;
+    background-color: #e53935;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.removeButton:hover {
+    background-color: #b71c1c;
+}
