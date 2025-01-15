@@ -7,8 +7,8 @@ const Navbar = () => {
 
   return (
     <nav>
-      <Link to="/" className={styles.navbarLink}>Home</Link>
-      <Link to="/wishlist" className={styles.navbarLink}>Wishlist ({wishlist.length})</Link>
+      <Link to="/" className={styles.navbarLink}>Accueil</Link>
+      <Link to="/wishlist" className={styles.navbarLink}>Liste de souhaits ({wishlist.length})</Link>
     </nav>
   );
 };

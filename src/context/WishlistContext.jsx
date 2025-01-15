@@ -21,8 +21,9 @@ export const WishlistProvider = ({ children }) => {
       id: movie.id,
       title: movie.title,
       backdrop_path: movie.backdrop_path,
+      rating: 0,
     };
-  
+
     if (!wishlist.find((item) => item.id === movieWithCorrectData.id)) {
       setWishlist([...wishlist, movieWithCorrectData]);
     }
@@ -32,8 +33,18 @@ export const WishlistProvider = ({ children }) => {
     setWishlist(wishlist.filter((item) => item.id !== id));
   };
 
+  const updateRating = (movieId, rating) => {
+    setWishlist(
+      wishlist.map((movie) =>
+        movie.id === movieId ? { ...movie, rating } : movie
+      )
+    );
+  };
+
   return (
-    <WishlistContext.Provider value={{ wishlist, addToWishlist, removeFromWishlist }}>
+    <WishlistContext.Provider
+      value={{ wishlist, addToWishlist, removeFromWishlist, updateRating }}
+    >
       {children}
     </WishlistContext.Provider>
   );

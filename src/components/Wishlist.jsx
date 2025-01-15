@@ -1,12 +1,13 @@
 import { useWishlist } from '../context/WishlistContext'; 
 import styles from '../styles/Wishlist.module.css';
+import Rating from './Rating';
 
 const Wishlist = () => {
     const { wishlist, removeFromWishlist } = useWishlist();
 
     return (
         <div className={styles.container}>
-            <h1 className={styles.title}>Wishlist</h1>
+            <h1 className={styles.title}>Liste de souhaits</h1>
             <ul className={styles.wishlistList}>
                 {wishlist.length > 0 ? (
                     wishlist.map((movie) => (
@@ -17,16 +18,17 @@ const Wishlist = () => {
                                 className={styles.movieImage}
                             />
                             <h3 className={styles.movieTitle}>{movie.title}</h3>
+                            <Rating movieId={movie.id} currentRating={movie.rating} />
                             <button
                                 onClick={() => removeFromWishlist(movie.id)}
                                 className={styles.removeButton}
                             >
-                                Remove
+                                Supprimer
                             </button>
                         </li>
                     ))
                 ) : (
-                    <p>No movies in wishlist.</p>
+                    <p>Aucun film dans la liste de souhaits.</p>
                 )}
             </ul>
         </div>

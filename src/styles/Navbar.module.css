@@ -12,10 +12,11 @@ nav {
     padding: 8px 15px;
     border-radius: 5px;
     transition: background-color 0.3s ease, transform 0.3s ease;
+    background-color: #34495e;
   }
   
   .navbarLink:hover {
-    background-color: #3700b3;
+    background-color: #333;
     color: white;
     transform: scale(1.05);
   }

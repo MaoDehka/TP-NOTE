@@ -2,13 +2,14 @@ import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useWishlist } from '../context/WishlistContext';
 import styles from '../styles/MovieDetail.module.css';
+import Rating from './Rating';
 
 const MovieDetail = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState(null);
     const [cast, setCast] = useState([]);
     const [similarMovies, setSimilarMovies] = useState([]);
-    const { addToWishlist } = useWishlist();
+    const { addToWishlist, wishlist, updateRating } = useWishlist();
 
     useEffect(() => {
         fetch(`https://api.themoviedb.org/3/movie/${id}?api_key=706662e24ebe9cb961388e8451b855b9`)
@@ -24,7 +25,10 @@ const MovieDetail = () => {
             .then((data) => setSimilarMovies(data.results));
     }, [id]);
 
-    if (!movie) return <div>Loading...</div>;
+    const movieInWishlist = wishlist.find((item) => item.id === parseInt(id));
+    const currentRating = movieInWishlist ? movieInWishlist.rating : 0;
+
+    if (!movie) return <div>Chargement...</div>;
 
     return (
         <div className={styles.container}>
@@ -37,15 +41,16 @@ const MovieDetail = () => {
                 <div className={styles.movieInfo}>
                     <h1 className={styles.movieTitle}>{movie.title}</h1>
                     <p className={styles.movieOverview}>{movie.overview}</p>
-                    <p>Release Date: {movie.release_date}</p>
-                    <p>Rating: {movie.vote_average}</p>
+                    <p>Date de sortie: {movie.release_date}</p>
+                    <p>Note : {movie.vote_average}</p>
+                    <Rating movieId={movie.id} currentRating={currentRating} />
                     <button onClick={() => addToWishlist(movie)} className={styles.addButton}>
-                        Add to Wishlist
+                        Ajouter à la liste de souhaits
                     </button>
                 </div>
             </div>
 
-            <h2 className={styles.sectionTitle}>Cast</h2>
+            <h2 className={styles.sectionTitle}>Casting</h2>
             <ul className={styles.castList}>
                 {cast.map((actor) => (
                     <p key={actor.id} className={styles.actorCard}>
@@ -54,7 +59,7 @@ const MovieDetail = () => {
                 ))}
             </ul>
 
-            <h2 className={styles.sectionTitle}>Similar Movies</h2>
+            <h2 className={styles.sectionTitle}>Films similaires</h2>
             <div className={styles.similarMovies}>
                 {similarMovies.map((similar) => (
                     <div key={similar.id} className={styles.similarCard}>

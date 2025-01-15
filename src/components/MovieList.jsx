@@ -74,20 +74,20 @@ const MovieList = () => {
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Search for a movie..."
+                    placeholder="Rechercher un film..."
                     className={styles.searchInput}
                 />
                 <button onClick={handleSearch} className={styles.searchButton}>
-                    Search
+                    Rechercher
                 </button>
                 <select
                     onChange={(e) => setCategory(e.target.value)}
                     className={styles.categorySelect}
                 >
-                    <option value="popular">Popular</option>
-                    <option value="now_playing">Now Playing</option>
-                    <option value="top_rated">Top Rated</option>
-                    <option value="upcoming">Upcoming</option>
+                    <option value="popular">Populaire</option>
+                    <option value="now_playing">Actuellement</option>
+                    <option value="top_rated">Mieux notés</option>
+                    <option value="upcoming">Prochainement</option>
                 </select>
             </div>
 
@@ -100,9 +100,10 @@ const MovieList = () => {
                             className={styles.movieImage}
                         />
                         <h3 className={styles.movieTitle}>{movie.title}</h3>
-                        <p className={styles.movieRating}>Rating: {movie.vote_average}</p>
+                        <p className={styles.movieRating}>Note : {movie.vote_average}</p>
                         <Link to={`/movie/${movie.id}`} className={styles.detailsButton}>
-                            View Details
+                            Voir plus
+
                         </Link>
                     </div>
                 ))}
