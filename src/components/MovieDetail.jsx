@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import { useWishlist } from '../context/WishlistContext';
 import styles from '../styles/MovieDetail.module.css';
 import Rating from './Rating';
-
 const MovieDetail = () => {
     const { id } = useParams();
     const [movie, setMovie] = useState(null);

@@ -15,7 +15,6 @@ export const WishlistProvider = ({ children }) => {
       localStorage.setItem('wishlist', JSON.stringify(wishlist));
     }
   }, [wishlist]);
-
   const addToWishlist = (movie) => {
     const movieWithCorrectData = {
       id: movie.id,
@@ -49,5 +48,4 @@ export const WishlistProvider = ({ children }) => {
     </WishlistContext.Provider>
   );
 };
-
 export const useWishlist = () => useContext(WishlistContext);

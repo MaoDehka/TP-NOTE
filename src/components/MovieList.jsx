@@ -9,7 +9,7 @@ const useDebounce = (value, delay) => {
         const handler = setTimeout(() => {
             setDebouncedValue(value);
         }, delay);
-
+        
         return () => {
             clearTimeout(handler);
         };
@@ -22,15 +22,20 @@ const MovieList = () => {
     const [movies, setMovies] = useState([]);
     const [query, setQuery] = useState('');
     const [category, setCategory] = useState('popular');
+    const [genre, setGenre] = useState('');
     const [page, setPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [genres, setGenres] = useState([]);
 
     const debouncedQuery = useDebounce(query, 500);
-
+    useEffect(() => {
+        fetch('https://api.themoviedb.org/3/genre/movie/list?api_key=706662e24ebe9cb961388e8451b855b9')
+            .then((response) => response.json())
+            .then((data) => setGenres(data.genres));
+    }, []);
     useEffect(() => {
         fetchMovies();
-    }, [category, page]);
-
+    }, [category, page, genre]);
     useEffect(() => {
         if (debouncedQuery) {
             handleSearch();
@@ -38,14 +43,19 @@ const MovieList = () => {
     }, [debouncedQuery, page]);
 
     const fetchMovies = () => {
-        fetch(`https://api.themoviedb.org/3/movie/${category}?api_key=706662e24ebe9cb961388e8451b855b9&page=${page}`)
+        let url = `https://api.themoviedb.org/3/movie/${category}?api_key=706662e24ebe9cb961388e8451b855b9&page=${page}`;
+
+        if (genre) {
+            url = `https://api.themoviedb.org/3/discover/movie?api_key=706662e24ebe9cb961388e8451b855b9&page=${page}&with_genres=${genre}`;
+        }
+
+        fetch(url)
             .then((response) => response.json())
             .then((data) => {
                 setMovies(data.results);
                 setTotalPages(data.total_pages);
             });
     };
-
     const handleSearch = () => {
         fetch(`https://api.themoviedb.org/3/search/movie?api_key=706662e24ebe9cb961388e8451b855b9&query=${debouncedQuery}&page=${page}`)
             .then((response) => response.json())
@@ -54,13 +64,11 @@ const MovieList = () => {
                 setTotalPages(data.total_pages);
             });
     };
-
     const handlePrevPage = () => {
         if (page > 1) {
             setPage(page - 1);
         }
     };
-
     const handleNextPage = () => {
         if (page < totalPages) {
             setPage(page + 1);
@@ -89,6 +97,17 @@ const MovieList = () => {
                     <option value="top_rated">Mieux notés</option>
                     <option value="upcoming">Prochainement</option>
                 </select>
+                <select
+                    onChange={(e) => setGenre(e.target.value)}
+                    className={styles.categorySelect}
+                >
+                    <option value="">Sélectionner un genre</option>
+                    {genres.map((genre) => (
+                        <option key={genre.id} value={genre.id}>
+                            {genre.name}
+                        </option>
+                    ))}
+                </select>
             </div>
 
             <div className={styles.moviesGrid}>
@@ -103,7 +122,6 @@ const MovieList = () => {
                         <p className={styles.movieRating}>Note : {movie.vote_average}</p>
                         <Link to={`/movie/${movie.id}`} className={styles.detailsButton}>
                             Voir plus
-
                         </Link>
                     </div>
                 ))}

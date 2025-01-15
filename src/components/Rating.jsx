@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import { useWishlist } from '../context/WishlistContext';
 import styles from '../styles/Rating.module.css';
-
 const Rating = ({ movieId, currentRating }) => {
   const [rating, setRating] = useState(currentRating || 0);
   const { updateRating } = useWishlist();

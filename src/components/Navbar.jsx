@@ -4,7 +4,6 @@ import styles from '../styles/Navbar.module.css';
 
 const Navbar = () => {
   const { wishlist } = useWishlist();
-
   return (
     <nav>
       <Link to="/" className={styles.navbarLink}>Accueil</Link>
